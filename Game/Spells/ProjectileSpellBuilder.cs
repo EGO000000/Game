@@ -5,13 +5,11 @@ namespace Game.Spells
     public class ProjectileSpellBuilder : ISpellBuilder
     {
         // TODO: check functionality in lab 8
-        private List<string> _effects;
-        private Animation _animation;
-        private int _cost;
-        
-        public ProjectileSpellBuilder()
-        {
+        private ProjectileSpell nselfSpell;
 
+        public ProjectileSpellBuilder(double speed, int cost)
+        {
+            nselfSpell = new ProjectileSpell(speed, cost);
         }
         public ISpellBuilder AddEffect(string effectName)
         {
@@ -20,17 +18,19 @@ namespace Game.Spells
 
         public ISpell CreateSpell(IWizard wizard)
         {
-            throw new NotImplementedException();
+            return nselfSpell;
         }
 
         public ISpellBuilder SetAnimation(Animation animation)
         {
-            throw new NotImplementedException();
+            nselfSpell.SetAnimation(animation);
+            return this;
         }
 
         public ISpellBuilder SetSpellCost(int cost)
         {
-            throw new NotImplementedException();
+            nselfSpell.SetCost(cost);
+            return this;
         }
     }
 }

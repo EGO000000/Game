@@ -5,6 +5,14 @@ namespace Game.Spells
     public class SelfCastSpellBuilder : ISpellBuilder
     {
         // TODO: check functionality in lab 8
+
+        private SelfCastSpell selfCastSpell;
+
+        public SelfCastSpellBuilder()
+        {
+            selfCastSpell = new SelfCastSpell();
+        }
+
         public ISpellBuilder AddEffect(string effectName)
         {
             throw new NotImplementedException();
@@ -12,17 +20,19 @@ namespace Game.Spells
 
         public ISpell CreateSpell(IWizard wizard)
         {
-            throw new NotImplementedException();
+            return selfCastSpell;
         }
 
         public ISpellBuilder SetAnimation(Animation animation)
         {
-            throw new NotImplementedException();
+            selfCastSpell.SetAnimation(animation);
+            return this;
         }
 
         public ISpellBuilder SetSpellCost(int cost)
         {
-            throw new NotImplementedException();
+            selfCastSpell.SetCost(cost);
+            return this;
         }
     }
 }
