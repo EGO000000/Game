@@ -37,6 +37,9 @@
     <None Update="resources\maps\tilesets\Background.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="resources\maps\tilesets\tile.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="resources\maps\tilesets\tileset_basic.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
