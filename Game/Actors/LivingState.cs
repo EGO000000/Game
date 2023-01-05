@@ -17,6 +17,7 @@ namespace Game.Actors
         private readonly int JUMP_TIME;
         private readonly int FALL_TIME;
         private bool is_jump = false;
+        private bool is_fight = false;
         private bool first = true;
         private bool first_fight = true;
 
@@ -34,14 +35,14 @@ namespace Game.Actors
         }
 
         public void Update()
-        {   
-            if(timer_jump > 0 && timer_jump < JUMP_TIME && is_jump)
+        {
+            if (timer_jump > 0 && timer_jump < JUMP_TIME && is_jump)
             {
                 jump.Execute(this.actor);
                 timer_jump++;
                 //Console.WriteLine(this.actor.GetAnimation().GetDuration());
             }
-            else if(timer_jump > 0 && timer_jump < FALL_TIME && is_jump)
+            else if (timer_jump > 0 && timer_jump < FALL_TIME && is_jump)
             {
                 timer_jump++;
                 if (first)
@@ -49,21 +50,20 @@ namespace Game.Actors
                     this.actor.SetAnimation("jump");
                     this.actor.GetAnimation().Stop();
                     first = false;
-                }                               
+                }
             }
-            else 
+            else if(is_jump)
             {
                 timer_jump = 0;
                 is_jump = false;
                 first = true;
-                this.actor.GetAnimation().StopAt(0);
+                this.actor.GetAnimation().SetCurrentFrame(0);
             }
-            if (timer_fight > 0 && timer_fight < JUMP_TIME+6)
+            if (timer_fight > 0 && timer_fight < JUMP_TIME + 6 && is_fight)
             {
                 timer_fight++;
-                Console.WriteLine(this.actor.GetAnimation().GetDuration());
             }
-            else if (timer_fight > 0 && timer_fight < FALL_TIME+5)
+            else if (timer_fight > 0 && timer_fight < FALL_TIME + 5 && is_fight)
             {
                 timer_fight++;
                 if (first_fight)
@@ -73,14 +73,15 @@ namespace Game.Actors
                     first_fight = false;
                 }
             }
-            else
+            else if (is_fight)
             {
                 timer_fight = 0;
                 first_fight = true;
-                //this.actor.GetAnimation().Start();
+                is_fight = false;
+                this.actor.GetAnimation().SetCurrentFrame(0);
             }
             if (Input.GetInstance().IsKeyDown(Input.Key.D))
-            {                
+            {
                 if (this.actor.GetOrientation() == ActorOrientation.FacingLeft)
                 {
                     this.actor.SetAnimation("run");
@@ -125,13 +126,14 @@ namespace Game.Actors
                 this.actor.SetAnimation("jump");
                 this.actor.GetAnimation().Start();
                 timer_jump++;
-                is_jump= true;
+                is_jump = true;
             }
             else if (Input.GetInstance().IsKeyPressed(Input.Key.KP_6))
             {
                 this.actor.SetAnimation("fight");
                 this.actor.GetAnimation().Start();
                 timer_fight++;
+                is_fight = true;
             }
             /*
             else if (Input.GetInstance().IsKeyPressed(Input.Key.E))
@@ -139,13 +141,12 @@ namespace Game.Actors
                 this.Use(this.actor);
             }*/
             else
-            { 
-                if(timer_jump == 0 && timer_fight == 0)
+            {
+                if (timer_jump == 0 && timer_fight == 0)
                 {
                     this.actor.SetAnimation("stay");
                     this.actor.GetAnimation().Start();
                 }
-                    
             }
         }
     }
