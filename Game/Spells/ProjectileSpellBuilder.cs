@@ -7,9 +7,9 @@ namespace Game.Spells
         // TODO: check functionality in lab 8
         private ProjectileSpell nselfSpell;
 
-        public ProjectileSpellBuilder(double speed, int cost)
+        public ProjectileSpellBuilder(double speed)
         {
-            nselfSpell = new ProjectileSpell(speed, cost);
+            nselfSpell = new ProjectileSpell(speed);
         }
         public ISpellBuilder AddEffect(string effectName)
         {

@@ -8,17 +8,16 @@ namespace Game.Spells
     {
         // TODO: check functionality in lab 8
         private List<IEffect> effects;
-        private double speed;
+        private double speed = 0.0;
         private ISpeedStrategy strategy;
         //private IJumpStrategy jumpStrategy;
         private int cost = 0;
         private Animation animation;
 
-        public ProjectileSpell(double speed, int cost)
+        public ProjectileSpell(double speed)
         {
             this.effects = new List<IEffect>();
             this.speed = speed;
-            this.cost = cost;
         }
 
         public ISpell AddEffect(ICommand effect)
@@ -38,7 +37,11 @@ namespace Game.Spells
 
         public void ApplyEffects(ICharacter target)
         {
-            throw new NotImplementedException();
+            foreach (IEffect effect in effects)
+            {
+                effect.SetTarget(target);
+                ((ICommand)effect).Execute();
+            }
         }
 
         public int GetCost()

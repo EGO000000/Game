@@ -1,4 +1,6 @@
-﻿namespace Game.Spells
+﻿using Merlin2d.Game;
+
+namespace Game.Spells
 {
     public class SpellDirector : ISpellDirector
     {
