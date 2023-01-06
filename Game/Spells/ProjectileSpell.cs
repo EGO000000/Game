@@ -39,7 +39,7 @@ namespace Game.Spells
         {
             foreach (IEffect effect in effects)
             {
-                //effect.SetTarget(target);
+                effect.SetTarget(target);
                 ((ICommand)effect).Execute();
             }
         }

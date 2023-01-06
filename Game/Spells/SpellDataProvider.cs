@@ -5,8 +5,6 @@ namespace Game.Spells
 {
     public class SpellDataProvider : ISpellDataProvider
     {
-        // TODO: add exceptions as per step 1.5 in lab 9
-
         private class SpellEffect
         {
             public string Name { get; set; }
@@ -48,7 +46,7 @@ namespace Game.Spells
             if (effectInfos == null)
                 this.LoadEffectInfo();
 
-            return effectInfos;
+            return this.effectInfos;
         }
 
         private void LoadSpellInfo()
@@ -65,9 +63,9 @@ namespace Game.Spells
         public Dictionary<string, SpellInfo> GetSpellInfo()
         {
             if (spellInfos == null)
-                this.LoadSpellInfo();
+                LoadSpellInfo();
 
-            return spellInfos;
+            return this.spellInfos;
         }
     }
 }

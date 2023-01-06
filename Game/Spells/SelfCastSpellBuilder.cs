@@ -1,4 +1,5 @@
 ﻿using Merlin2d.Game;
+using Merlin2d.Game.Actions;
 
 namespace Game.Spells
 {
@@ -15,7 +16,10 @@ namespace Game.Spells
 
         public ISpellBuilder AddEffect(string effectName)
         {
-            throw new NotImplementedException();
+            SpellEffectFactory spellEffectFactory = new SpellEffectFactory();
+            IEffect effect = spellEffectFactory.Create(effectName);
+            selfCastSpell.AddEffect((ICommand)effect);
+            return this;
         }
 
         public ISpell CreateSpell(IWizard wizard)

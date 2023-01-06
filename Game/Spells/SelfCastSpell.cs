@@ -33,7 +33,11 @@ namespace Game.Spells
 
         public void ApplyEffects(ICharacter target)
         {
-            throw new NotImplementedException();
+            foreach (IEffect effect in effects)
+            {
+                effect.SetTarget(target);
+                ((ICommand)effect).Execute();
+            }
         }
 
         public void SetAnimation(Animation animation)
