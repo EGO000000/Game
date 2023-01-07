@@ -7,30 +7,24 @@ namespace Game.Factories
 {
     public class ActorFactory : IFactory
     {
+        readonly Fly_EyeFactory fly_EyeFactory = new Fly_EyeFactory();
+        readonly PlayerFactory playerFactory = new PlayerFactory();
+        readonly DoorFactory doorFactory = new DoorFactory();
+
         public IActor Create(string actorType, string actorName, int x, int y)
         {
-            IActor actor = null;
 
             if (actorType == "Player")
             {
-                actor = new Player(x, y, 2);
-                actor.SetName(actorName);
-                actor.SetPhysics(true);
-                actor.SetPosition(x, y);
+                return playerFactory.CerateSequence(x, y);
             }
             else if (actorType == "Fly_Eye")
             {
-                actor = new Fly_Eye(x, y, 2);
-                actor.SetName(actorName);
-                actor.SetPhysics(true);
-                actor.SetPosition(x, y);
+                return fly_EyeFactory.CerateSequence(x, y);
             }
             else if (actorType == "Door")
             {
-                actor = new Door(x,y);
-                actor.SetName(actorName);
-                actor.SetPhysics(true);
-                actor.SetPosition(x, y);
+                return doorFactory.CerateSequence(x, y);
                 
             }
             /*else if (actorType == "Door")
@@ -47,8 +41,6 @@ namespace Game.Factories
             {
                 throw new ArgumentException("Unknown type");
             }
-
-            return actor;
         }
     }
 }

@@ -19,6 +19,7 @@ namespace Game.Actors
             this.close_animation = new Animation("resources/sprites/door/door.png", 32, 96);
             this.open_animation = new Animation("resources/sprites/door/door_left.png", 56, 96);
             this.SetAnimation(this.close_animation);
+            SetPosition(x, y);
             this.x = x;
             this.y = y;
             this.x1 = x+32;

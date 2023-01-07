@@ -36,6 +36,7 @@ namespace Game.Actors.Enemy
             //GetAnimation().FlipAnimation();
             SetSpeedStrategy(new NormalSpeedStrategy());
             GetSpeed(this.speed);
+            SetPosition(x, y);            
         }
 
         public override int GetDamage()

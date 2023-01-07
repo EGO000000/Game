@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <Folder Include="Items\" />
-    <Folder Include="Factories\" />
     <Folder Include="resources\sprites\enemy\" />
   </ItemGroup>
 
