@@ -5,12 +5,12 @@ using Merlin2d.Game.Actors;
 
 namespace Game.Factories
 {
-    internal class DoorFactory : SequenceFactory
+    internal class ButtonFactory : SequenceFactory
     {
         public override IActor CerateSequence(int x, int y)
         {
-            IActor actor = new Door(x, y);
-            actor.SetName($"Door-{GetNext()}");
+            IActor actor = new PressurePlate(x, y);
+            actor.SetName($"Button-{GetNext()}");
             actor.SetPhysics(true);
 
             return actor;

@@ -1,2 +1,4 @@
 name;spelltype;animationpath;animationwidth;animationheight;effect1,effect2,effect3
-iceball;projectile;resources/sprites/iceball.png;32;32;Damage-10,SpeedChange-20
+iceball;projectile;resources/sprites/spells/iceball.png;32;32;Damage-10,SpeedChange-20
+fireball;projectile;resources/sprites/spells/fireball.png;32;32;Damage-10
+electroball;projectile;resources/sprites/spells/player-shoot1.png;32;32;Damage-10, Pause-3

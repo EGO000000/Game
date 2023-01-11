@@ -2,7 +2,7 @@
 using Merlin2d.Game.Actors;
 using System.ComponentModel;
 
-namespace Game.Actors
+namespace Game.Actors.Button_and_door
 {
     public class Door : AbstractActor
     {
@@ -15,17 +15,17 @@ namespace Game.Actors
         private Animation close_animation;
         private Animation open_animation;
 
-        public Door(int x, int y) {
-            this.close_animation = new Animation("resources/sprites/door/door.png", 32, 96);
-            this.open_animation = new Animation("resources/sprites/door/door_left.png", 56, 96);
-            this.SetAnimation(this.close_animation);
+        public Door(int x, int y)
+        {
+            close_animation = new Animation("resources/sprites/door/door.png", 32, 96);
+            open_animation = new Animation("resources/sprites/door/door_left.png", 56, 96);
+            SetAnimation(close_animation);
             SetPosition(x, y);
-            this.x = x;
-            this.y = y;
-            this.x1 = x+32;
-            this.y1 = y+96;
+            this.x = x;//изменить при интеграции на карту
+            this.y = y;//изменить при интеграции на карту
+            this.x1 = this.x + 10;
+            this.y1 = this.y + 10;
             //Console.Write(x+" "+y);
-            this.CloseDoor();
         }
 
         public void OpenDoor()
@@ -41,18 +41,19 @@ namespace Game.Actors
 
         public void CloseDoor()
         {
-            for (int i = x; i <= x; i++)
+            for (int i = x; i <= x1; i++)
             {
-                for (int j = y; j <= y; j++)
+                for (int j = y; j <= y1; j++)
                 {
-                    //this.GetWorld().SetWall(12, 12, true);
+                    GetWorld().SetWall(i / 16, j / 16, true);
                 }
             }
         }
 
         public override void Update()
         {
-            
+            if (IntersectsWithActor(GetWorld().GetActors().Find(x => x.GetName() == "Player-1"), "1") != null)
+                CloseDoor();
         }
     }
 }

@@ -118,18 +118,19 @@ namespace Game.Actors
             return affectedByPhysics;
         }
 
-        public bool IntersectsWithActor(IActor other)
+        public bool IntersectsWithActor(IActor other, string x, int plus = 0)
         {
-            if ((posX < other.GetX() - GetWidth()) || (posX > other.GetX() + other.GetWidth()))
+            switch (x)
             {
-                return false;
+                case "1":
+                    return !((posX < other.GetX() - GetWidth()) || (posX > other.GetX() + other.GetWidth()) || (posY < other.GetY() - GetHeight()) || (posY > other.GetY() + other.GetHeight()));
+                case"2":
+                    if (!(posX < other.GetX()+plus - GetWidth()))
+                        Console.WriteLine("true");
+                    return !((posX < other.GetX() - GetWidth()) || (posX > other.GetX() + other.GetWidth()) || (posY < other.GetY() - GetHeight()) || (posY > other.GetY() + other.GetHeight()));
+                default:
+                    return false;
             }
-
-            if ((posY < other.GetY() - GetHeight()) || (posY > other.GetY() + other.GetHeight()))
-            {
-                return false;
-            }
-            return true;
         }
 
         public bool RemovedFromWorld()
@@ -143,5 +144,11 @@ namespace Game.Actors
         }
 
         public abstract void Update();
+
+        public bool IntersectsWithActor(IActor other)
+        {
+            
+            return !((posX < other.GetX() - GetWidth()) || (posX > other.GetX() + other.GetWidth()) || (posY < other.GetY() - GetHeight()) || (posY > other.GetY() + other.GetHeight()));
+        }
     }
 }

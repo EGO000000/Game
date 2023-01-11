@@ -1,4 +1,5 @@
 ﻿using Game.Actors;
+using Game.Actors.Button_and_door;
 using Game.Actors.Enemy;
 using Merlin2d.Game;
 using Merlin2d.Game.Actors;
@@ -10,9 +11,14 @@ namespace Game.Factories
         readonly Fly_EyeFactory fly_EyeFactory = new Fly_EyeFactory();
         readonly PlayerFactory playerFactory = new PlayerFactory();
         readonly DoorFactory doorFactory = new DoorFactory();
+        readonly ButtonFactory buttonFactory = new ButtonFactory();
+
+        private Door door = null;
+        private PressurePlate plate = null;
+
 
         public IActor Create(string actorType, string actorName, int x, int y)
-        {
+        { 
 
             if (actorType == "Player")
             {
@@ -24,8 +30,14 @@ namespace Game.Factories
             }
             else if (actorType == "Door")
             {
-                return doorFactory.CerateSequence(x, y);
-                
+                IActor actor = doorFactory.CerateSequence(x, y);
+                return actor;                
+            }
+            else if (actorType == "Button")
+            {
+                IActor actor = buttonFactory.CerateSequence(x, y);
+                plate = (PressurePlate)actor;
+                return actor;
             }
             /*else if (actorType == "Door")
             {
@@ -42,5 +54,6 @@ namespace Game.Factories
                 throw new ArgumentException("Unknown type");
             }
         }
+        
     }
 }
